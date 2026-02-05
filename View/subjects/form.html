@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Nueva' if modo=='crear' else 'Editar' }} asignatura{% endblock %}
+{% block content %}
+
+<h3 class="mb-3">{{ 'Nueva' if modo=='crear' else 'Editar' }} asignatura</h3>
+
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label fw-bold">Código</label>
+    <input class="form-control" name="codigo"
+           value="{{ asig['asig_cod'] if asig and 'asig_cod' in asig else (asig['codigo'] if asig and 'codigo' in asig else '') }}">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label fw-bold">Nombre</label>
+    <input class="form-control" name="nombre"
+           value="{{ asig['asig_nom'] if asig and 'asig_nom' in asig else (asig['nombre'] if asig and 'nombre' in asig else '') }}">
+  </div>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-success" type="submit">Guardar</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('subjects.list_') }}">Cancelar</a>
+  </div>
+</form>
+
+{% endblock %}
