@@ -4,10 +4,12 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=Path(__file__).resolve().parent / ".env")
 
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, render_template, url_for
 from config import DevelopmentConfig, ProductionConfig
 from BBD.db import init_db
 from Controller.subjects.routes import bp as subjects_bp
+from Controller.calendar.routes import bp as calendar_bp
+
 
 load_dotenv()
 
@@ -27,10 +29,11 @@ def create_app():
         init_db()
 
     app.register_blueprint(subjects_bp)
+    app.register_blueprint(calendar_bp)
 
     @app.get("/")
     def home():
-        return redirect(url_for("subjects.list_"))
+        return render_template("home.html")
 
     return app
 

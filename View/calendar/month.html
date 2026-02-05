@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Calendario{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <a class="btn btn-outline-secondary"
+     href="{{ url_for('calendar.month_current', y=view.prev_year, m=view.prev_month) }}">←</a>
+
+  <div class="text-center">
+    <h4 class="m-0">{{ view.month_name }} {{ view.year }}</h4>
+    <div class="text-muted small">Vista mensual</div>
+  </div>
+
+  <a class="btn btn-outline-secondary"
+     href="{{ url_for('calendar.month_current', y=view.next_year, m=view.next_month) }}">→</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered text-center align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for week in view.weeks %}
+      <tr>
+        {% for day in week %}
+          {% if day == 0 %}
+            <td class="bg-light"></td>
+          {% else %}
+            {% set is_today = (view.today_day == day) %}
+            <td class="{% if is_today %}table-primary fw-bold{% endif %}">
+              {{ day }}
+              <!-- tareas -->
+            </td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

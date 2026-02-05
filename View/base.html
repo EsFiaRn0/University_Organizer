@@ -10,7 +10,8 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/">Organizador</a>
-    <a class="btn btn-success btn-sm" href="{{ url_for('subjects.new_') }}">+ Nueva asignatura</a>
+    <a class="btn btn-outline-light btn-sm" href="{{ url_for('subjects.list_') }}">Ver Asignaturas</a>
+    <a class="btn btn-outline-light btn-sm" href="{{ url_for('calendar.month_current') }}">Calendario</a>
   </div>
 </nav>
 
