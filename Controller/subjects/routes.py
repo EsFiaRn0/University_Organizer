@@ -1,4 +1,4 @@
-import sqlite3
+﻿import sqlite3
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from Model.subjects import repository as SubRepo
 

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 {% block title %}Ver asignatura{% endblock %}
 {% block content %}
 
@@ -12,6 +12,7 @@
     <a class="btn btn-outline-primary" href="{{ url_for('subjects.edit_', asig_id=asig['asig_id']) }}">Editar</a>
     <form method="post" action="{{ url_for('subjects.delete_', asig_id=asig['asig_id']) }}"
           onsubmit="return confirm('¿Eliminar esta asignatura?');">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <button class="btn btn-outline-danger" type="submit">Eliminar</button>
     </form>
   </div>
