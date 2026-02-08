@@ -1,10 +1,83 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
+{% block styles %}
+  <link href="{{ url_for('static', filename='subjects.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='calendar.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 
-<div class="text-center mt-5">
-  <h3 class="mb-2">Organizador Universitario</h3>
-  <p class="text-muted">Por ahora no hay contenido en el inicio.</p>
-</div>
+<section class="row g-4 mt-4 home-panels">
+  <div class="col-lg-7">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <div class="tag mb-1">Tus asignaturas</div>
+        <h4 class="m-0">Resumen actual</h4>
+      </div>
+      <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('subjects.list_') }}">Ver todas</a>
+    </div>
+
+    {% if asignaturas %}
+      <div class="cards-grid">
+        {% for a in asignaturas[:6] %}
+        <div class="subject-card fade-up">
+          <div class="d-flex align-items-start justify-content-between mb-2">
+            <span class="mono text-muted">{{ a["asig_cod"] }}</span>
+            <span class="badge text-bg-light">Activo</span>
+          </div>
+          <div class="fw-semibold">{{ a["asig_nom"] }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="soft-panel p-4 text-center">
+        <div class="tag mb-2">Sin asignaturas</div>
+        <p class="text-muted mb-3">Aún no tienes asignaturas creadas.</p>
+        <a class="btn btn-primary" href="{{ url_for('subjects.new_') }}">Crear asignatura</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="col-lg-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <div class="tag mb-1">Calendario</div>
+        <h4 class="m-0">{{ view.month_name }} {{ view.year }}</h4>
+      </div>
+      <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('calendar.month_current') }}">Abrir</a>
+    </div>
+
+    <div class="card-shell p-3 mini-calendar">
+      <div class="row g-2 calendar-weekday text-center mb-2">
+        <div class="col">Lun</div>
+        <div class="col">Mar</div>
+        <div class="col">Mié</div>
+        <div class="col">Jue</div>
+        <div class="col">Vie</div>
+        <div class="col">Sáb</div>
+        <div class="col">Dom</div>
+      </div>
+
+      {% for week in view.weeks %}
+      <div class="row g-2 mb-2">
+        {% for day in week %}
+          {% if day == 0 %}
+            <div class="col">
+              <div class="calendar-blank"></div>
+            </div>
+          {% else %}
+            {% set is_today = (view.today_day == day) %}
+            <div class="col">
+              <div class="calendar-day {% if is_today %}is-today{% endif %}">
+                <div class="day-number">{{ day }}</div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
 {% endblock %}

@@ -1,45 +1,53 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 {% block title %}Calendario{% endblock %}
+{% block styles %}
+  <link href="{{ url_for('static', filename='calendar.css') }}" rel="stylesheet">
+{% endblock %}
 {% block content %}
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <a class="btn btn-outline-secondary"
-     href="{{ url_for('calendar.month_current', y=view.prev_year, m=view.prev_month) }}">&larr;</a>
-
-  <div class="text-center">
-    <h4 class="m-0">{{ view.month_name }} {{ view.year }}</h4>
-    <div class="text-muted small">Vista mensual</div>
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+  <div>
+    <div class="tag mb-1">Vista mensual</div>
+    <h3 class="m-0 page-title">{{ view.month_name }} {{ view.year }}</h3>
   </div>
-
-  <a class="btn btn-outline-secondary"
-     href="{{ url_for('calendar.month_current', y=view.next_year, m=view.next_month) }}">&rarr;</a>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary"
+       href="{{ url_for('calendar.month_current', y=view.prev_year, m=view.prev_month) }}">&larr; Mes anterior</a>
+    <a class="btn btn-outline-secondary"
+       href="{{ url_for('calendar.month_current', y=view.next_year, m=view.next_month) }}">Mes siguiente &rarr;</a>
+  </div>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-bordered text-center align-middle">
-    <thead class="table-light">
-      <tr>
-        <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for week in view.weeks %}
-      <tr>
-        {% for day in week %}
-          {% if day == 0 %}
-            <td class="bg-light"></td>
-          {% else %}
-            {% set is_today = (view.today_day == day) %}
-            <td class="{% if is_today %}table-primary fw-bold{% endif %}">
-              {{ day }}
-              <!-- tareas -->
-            </td>
-          {% endif %}
-        {% endfor %}
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="card-shell p-3 p-md-4">
+  <div class="row g-2 calendar-weekday text-center mb-2">
+    <div class="col">Lun</div>
+    <div class="col">Mar</div>
+    <div class="col">Mié</div>
+    <div class="col">Jue</div>
+    <div class="col">Vie</div>
+    <div class="col">Sáb</div>
+    <div class="col">Dom</div>
+  </div>
+
+  {% for week in view.weeks %}
+  <div class="row g-2 mb-2">
+    {% for day in week %}
+      {% if day == 0 %}
+        <div class="col">
+          <div class="calendar-blank"></div>
+        </div>
+      {% else %}
+        {% set is_today = (view.today_day == day) %}
+        <div class="col">
+          <div class="calendar-day {% if is_today %}is-today{% endif %}">
+            <div class="day-number">{{ day }}</div>
+            <div class="day-slot">Sin tareas</div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

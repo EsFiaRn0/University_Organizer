@@ -1,0 +1,53 @@
+.calendar-day {
+  height: 92px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar-day.is-today {
+  border: 1px solid rgba(14, 165, 233, 0.6);
+  box-shadow: 0 8px 16px rgba(14, 165, 233, 0.2);
+  background: linear-gradient(140deg, rgba(14, 165, 233, 0.12), rgba(255, 255, 255, 0.95));
+}
+
+.calendar-day .day-number {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink);
+  position: absolute;
+  top: 10px;
+  left: 12px;
+}
+
+.calendar-day .day-slot {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 34px;
+  padding: 0 10px;
+}
+
+.calendar-blank {
+  background: transparent;
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+  border-radius: 14px;
+  height: 92px;
+}
+
+.calendar-weekday {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+}
+
+.mini-calendar .calendar-day,
+.mini-calendar .calendar-blank {
+  height: 64px;
+}
+
+.mini-calendar .day-slot {
+  display: none;
+}

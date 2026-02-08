@@ -1,4 +1,5 @@
 import os
+from datetime import date
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -10,6 +11,8 @@ from config import DevelopmentConfig, ProductionConfig
 from BBD.db import init_db
 from Controller.subjects.routes import bp as subjects_bp
 from Controller.calendar.routes import bp as calendar_bp
+from Model.subjects import repository as SubRepo
+from Model.calendar.service import build_month_view
 
 def create_app():
     app = Flask(__name__, template_folder="View")
@@ -33,7 +36,9 @@ def create_app():
 
     @app.get("/")
     def home():
-        return render_template("home.html")
+        subjects = SubRepo.get_all()
+        view = build_month_view(date.today().year, date.today().month)
+        return render_template("home.html", asignaturas=subjects, view=view)
 
     return app
 
