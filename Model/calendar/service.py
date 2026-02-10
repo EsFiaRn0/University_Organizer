@@ -2,6 +2,27 @@
 from datetime import date
 import calendar as cal
 
+SPANISH_MONTHS = [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+]
+
+
+def _normalize_year_month(year: int, month: int) -> tuple[int, int]:
+    total = year * 12 + (month - 1)
+    new_year, month_index = divmod(total, 12)
+    return new_year, month_index + 1
+
 
 @dataclass(frozen=True)
 class MonthView:
@@ -17,14 +38,9 @@ class MonthView:
 
 
 def build_month_view(year: int, month: int) -> MonthView:
-    if month < 1:
-        year -= 1
-        month = 12
-    elif month > 12:
-        year += 1
-        month = 1
+    year, month = _normalize_year_month(year, month)
 
-    c = cal.Calendar(firstweekday=0) 
+    c = cal.Calendar(firstweekday=0)
     weeks = []
     week = []
     for d in c.itermonthdays(year, month):
@@ -40,7 +56,7 @@ def build_month_view(year: int, month: int) -> MonthView:
     today = date.today()
     today_day = today.day if (today.year == year and today.month == month) else None
 
-    # navegación
+    # navegacion
     if month == 1:
         prev_year, prev_month = year - 1, 12
     else:
@@ -54,7 +70,7 @@ def build_month_view(year: int, month: int) -> MonthView:
     return MonthView(
         year=year,
         month=month,
-        month_name=cal.month_name[month],
+        month_name=SPANISH_MONTHS[month - 1],
         weeks=weeks,
         today_day=today_day,
         prev_year=prev_year,

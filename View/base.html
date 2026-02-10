@@ -16,6 +16,7 @@
   <div class="container">
     <a class="navbar-brand fw-semibold" href="/">Organizador</a>
     <div class="d-flex gap-2">
+      <a class="btn btn-outline-light btn-sm" href="{{ url_for('tasks.list_') }}">Tareas</a>
       <a class="btn btn-outline-light btn-sm" href="{{ url_for('subjects.list_') }}">Asignaturas</a>
       <a class="btn btn-outline-light btn-sm" href="{{ url_for('calendar.month_current') }}">Calendario</a>
     </div>

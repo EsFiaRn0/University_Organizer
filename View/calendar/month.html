@@ -30,7 +30,7 @@
   </div>
 
   {% for week in view.weeks %}
-  <div class="row g-2 mb-2">
+  <div class="row g-2 mb-2 calendar-week">
     {% for day in week %}
       {% if day == 0 %}
         <div class="col">
@@ -41,7 +41,21 @@
         <div class="col">
           <div class="calendar-day {% if is_today %}is-today{% endif %}">
             <div class="day-number">{{ day }}</div>
-            <div class="day-slot">Sin tareas</div>
+            {% set day_tasks = tasks_by_day.get(day, []) %}
+            {% if day_tasks %}
+              <div class="calendar-tasks">
+                {% for t in day_tasks[:2] %}
+                  <div class="calendar-task priority-{{ t['proy_pri'] }}">
+                    <div class="calendar-task-title">{{ t["proy_nom"] }}</div>
+                  </div>
+                {% endfor %}
+                {% if day_tasks|length > 2 %}
+                  <div class="calendar-more">+{{ day_tasks|length - 2 }} más</div>
+                {% endif %}
+              </div>
+            {% else %}
+              <div class="day-slot">Sin tareas</div>
+            {% endif %}
           </div>
         </div>
       {% endif %}

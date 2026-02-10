@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Tareas{% endblock %}
+{% block styles %}
+  <link href="{{ url_for('static', filename='subjects.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='tasks.css') }}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+  <div>
+    <div class="tag mb-1">Panel de tareas</div>
+    <h3 class="m-0 page-title">Tareas</h3>
+  </div>
+  <a class="btn btn-primary" href="{{ url_for('tasks.new_') }}">Crear tarea</a>
+</div>
+
+{% if tareas %}
+  <div class="cards-grid task-grid {% if tareas|length <= 3 %}task-grid-few{% endif %}">
+    {% for t in tareas %}
+    <div class="subject-card fade-up task-card priority-{{ t['proy_pri'] }}">
+      <div class="d-flex align-items-start justify-content-between mb-2">
+        <span class="mono text-muted">Deadline {{ t["proy_fec"] }}</span>
+        <span class="badge text-bg-light">{{ t["proy_pri"]|capitalize }}</span>
+      </div>
+      <div class="task-header">
+        <div class="task-main">
+          <div class="fw-semibold fs-5 task-title">{{ t["proy_nom"] }}</div>
+          {% if t["proy_des"] %}
+            <div class="text-muted mb-2 task-desc">{{ t["proy_des"] }}</div>
+          {% endif %}
+        </div>
+        <div class="task-actions">
+          <a class="btn btn-sm btn-outline-dark" href="{{ url_for('tasks.view_', proy_id=t['proy_id']) }}">Ver</a>
+          <a class="btn btn-sm btn-outline-primary" href="{{ url_for('tasks.edit_', proy_id=t['proy_id']) }}">Editar</a>
+          <form method="post" action="{{ url_for('tasks.delete_', proy_id=t['proy_id']) }}"
+                onsubmit="return confirm('¿Eliminar esta tarea?');">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button class="btn btn-sm btn-outline-danger" type="submit">Eliminar</button>
+          </form>
+        </div>
+      </div>
+      <div class="d-flex align-items-center task-meta-row">
+        <span class="badge text-bg-secondary">{{ t["proy_est"]|replace("_"," ") }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="soft-panel p-4 text-center">
+    <div class="tag mb-2">Sin datos</div>
+    <h5 class="mb-2">Aún no hay tareas</h5>
+    <p class="text-muted mb-3">Crea tu primera tarea para organizar tus entregas.</p>
+    <a class="btn btn-primary" href="{{ url_for('tasks.new_') }}">Crear tarea</a>
+  </div>
+{% endif %}
+
+{% endblock %}
