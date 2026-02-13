@@ -11,7 +11,10 @@
     <div class="tag mb-1">Panel de tareas</div>
     <h3 class="m-0 page-title">Tareas</h3>
   </div>
-  <a class="btn btn-primary" href="{{ url_for('tasks.new_') }}">Crear tarea</a>
+  <a class="btn btn-primary btn-cta" href="{{ url_for('tasks.new_') }}">
+    <span class="cta-plus" aria-hidden="true">+</span>
+    Crear tarea
+  </a>
 </div>
 
 {% if tareas %}
@@ -20,7 +23,7 @@
     <div class="subject-card fade-up task-card priority-{{ t['proy_pri'] }}">
       <div class="d-flex align-items-start justify-content-between mb-2">
         <span class="mono text-muted">Deadline {{ t["proy_fec"] }}</span>
-        <span class="badge text-bg-light">{{ t["proy_pri"]|capitalize }}</span>
+        <span class="badge task-priority-badge priority-{{ t['proy_pri'] }}">{{ t["proy_pri"]|capitalize }}</span>
       </div>
       <div class="task-header">
         <div class="task-main">
@@ -30,7 +33,7 @@
           {% endif %}
         </div>
         <div class="task-actions">
-          <a class="btn btn-sm btn-outline-dark" href="{{ url_for('tasks.view_', proy_id=t['proy_id']) }}">Ver</a>
+          <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('tasks.view_', proy_id=t['proy_id']) }}">Ver</a>
           <a class="btn btn-sm btn-outline-primary" href="{{ url_for('tasks.edit_', proy_id=t['proy_id']) }}">Editar</a>
           <form method="post" action="{{ url_for('tasks.delete_', proy_id=t['proy_id']) }}"
                 onsubmit="return confirm('¿Eliminar esta tarea?');">
@@ -40,7 +43,7 @@
         </div>
       </div>
       <div class="d-flex align-items-center task-meta-row">
-        <span class="badge text-bg-secondary">{{ t["proy_est"]|replace("_"," ") }}</span>
+        <span class="badge task-status-badge">{{ t["proy_est"]|replace("_"," ") }}</span>
       </div>
     </div>
     {% endfor %}
@@ -50,7 +53,10 @@
     <div class="tag mb-2">Sin datos</div>
     <h5 class="mb-2">Aún no hay tareas</h5>
     <p class="text-muted mb-3">Crea tu primera tarea para organizar tus entregas.</p>
-    <a class="btn btn-primary" href="{{ url_for('tasks.new_') }}">Crear tarea</a>
+    <a class="btn btn-primary btn-cta" href="{{ url_for('tasks.new_') }}">
+      <span class="cta-plus" aria-hidden="true">+</span>
+      Crear tarea
+    </a>
   </div>
 {% endif %}
 

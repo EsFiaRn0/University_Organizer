@@ -9,7 +9,7 @@
 
 <section class="row g-4 mt-4 home-panels">
   <div class="col-lg-7">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3 home-section-head">
       <div>
         <div class="tag mb-1">Tus asignaturas</div>
         <h4 class="m-0">Resumen actual</h4>
@@ -25,7 +25,7 @@
         <div class="subject-card fade-up">
           <div class="d-flex align-items-start justify-content-between mb-2">
             <span class="mono text-muted home-subject-code">{{ a["asig_cod"] }}</span>
-            <span class="badge text-bg-light">Activo</span>
+            <span class="badge badge-active">Activo</span>
           </div>
           <div class="fw-semibold home-subject-name">{{ a["asig_nom"] }}</div>
         </div>
@@ -35,13 +35,16 @@
       <div class="soft-panel p-4 text-center">
         <div class="tag mb-2">Sin asignaturas</div>
         <p class="text-muted mb-3">Aún no tienes asignaturas creadas.</p>
-        <a class="btn btn-primary" href="{{ url_for('subjects.new_') }}">Crear asignatura</a>
+        <a class="btn btn-primary btn-cta" href="{{ url_for('subjects.new_') }}">
+          <span class="cta-plus" aria-hidden="true">+</span>
+          Crear asignatura
+        </a>
       </div>
     {% endif %}
   </div>
 
   <div class="col-lg-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3 home-section-head">
       <div>
         <div class="tag mb-1">Calendario</div>
         <h4 class="m-0">{{ view.month_name }} {{ view.year }}</h4>
@@ -83,7 +86,7 @@
     </div>
 
     <div class="mt-3">
-      <div class="d-flex justify-content-between align-items-center mb-2">
+      <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-2 home-section-head">
         <div>
           <div class="tag mb-1">Próximos días</div>
           <h5 class="m-0">Tareas (hoy + 4 días)</h5>
@@ -106,7 +109,7 @@
                 </div>
                 <div class="task-item-actions">
                   <span class="mono text-muted small task-item-date">{{ t["proy_fec"] }}</span>
-                  <a class="btn btn-sm btn-outline-dark" href="{{ url_for('tasks.view_', proy_id=t['proy_id']) }}">Ver</a>
+                  <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('tasks.view_', proy_id=t['proy_id']) }}">Ver</a>
                 </div>
               </div>
             </div>

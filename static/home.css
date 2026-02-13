@@ -39,6 +39,12 @@
   overflow: hidden;
 }
 
+[data-bs-theme="dark"] .task-item {
+  background: #0f172a;
+  border-color: rgba(148, 163, 184, 0.32);
+  box-shadow: 0 10px 20px rgba(2, 6, 23, 0.4);
+}
+
 .task-item.priority-baja {
   border-left: 4px solid #22c55e;
 }
@@ -84,4 +90,37 @@
 
 .task-item .fw-semibold {
   overflow: hidden;
+}
+
+@media (max-width: 767.98px) {
+  .task-list {
+    grid-template-columns: 1fr;
+  }
+
+  .home-section-head .btn {
+    width: 100%;
+  }
+
+  .task-item-header {
+    flex-direction: column;
+  }
+
+  .task-item-actions {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .home-subject-code {
+    max-width: 12ch;
+  }
+
+  .task-item-title,
+  .task-item-desc {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 }

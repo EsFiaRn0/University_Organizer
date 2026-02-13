@@ -10,7 +10,10 @@
     <div class="tag mb-1">Panel académico</div>
     <h3 class="m-0 page-title">Asignaturas</h3>
   </div>
-  <a class="btn btn-primary" href="{{ url_for('subjects.new_') }}">Crear asignatura</a>
+  <a class="btn btn-primary btn-cta" href="{{ url_for('subjects.new_') }}">
+    <span class="cta-plus" aria-hidden="true">+</span>
+    Crear asignatura
+  </a>
 </div>
 
 {% if asignaturas %}
@@ -19,11 +22,11 @@
     <div class="subject-card fade-up subject-item">
       <div class="d-flex align-items-start justify-content-between mb-2">
         <span class="mono text-muted subject-code">{{ a["asig_cod"] }}</span>
-        <span class="badge text-bg-light">Activo</span>
+        <span class="badge badge-active">Activo</span>
       </div>
       <div class="fw-semibold fs-5 mb-3 subject-title">{{ a["asig_nom"] }}</div>
-      <div class="d-flex gap-2">
-        <a class="btn btn-sm btn-outline-dark" href="{{ url_for('subjects.view_', asig_id=a['asig_id']) }}">Ver</a>
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('subjects.view_', asig_id=a['asig_id']) }}">Ver</a>
         <a class="btn btn-sm btn-outline-primary" href="{{ url_for('subjects.edit_', asig_id=a['asig_id']) }}">Editar</a>
         <form method="post" action="{{ url_for('subjects.delete_', asig_id=a['asig_id']) }}"
               onsubmit="return confirm('¿Eliminar esta asignatura?');">
@@ -39,7 +42,10 @@
     <div class="tag mb-2">Sin datos</div>
     <h5 class="mb-2">Aún no hay asignaturas</h5>
     <p class="text-muted mb-3">Crea tu primera asignatura para empezar a organizarte.</p>
-    <a class="btn btn-primary" href="{{ url_for('subjects.new_') }}">Crear asignatura</a>
+    <a class="btn btn-primary btn-cta" href="{{ url_for('subjects.new_') }}">
+      <span class="cta-plus" aria-hidden="true">+</span>
+      Crear asignatura
+    </a>
   </div>
 {% endif %}
 

@@ -50,7 +50,7 @@
 
   <div class="mb-3 mt-3">
     <label class="form-label fw-bold">Asignaturas (opcional)</label>
-    <div class="border rounded-3 p-3 bg-white">
+    <div class="border rounded-3 p-3 bg-body-tertiary border-secondary-subtle">
       {% if asignaturas %}
         {% for a in asignaturas %}
           <div class="form-check">
@@ -70,7 +70,7 @@
     <div class="form-text">Puedes seleccionar una o varias asignaturas, o ninguna.</div>
   </div>
 
-  <div class="d-flex gap-2">
+  <div class="d-flex gap-2 flex-wrap">
     <button class="btn btn-success" type="submit">Guardar</button>
     <a class="btn btn-outline-secondary" href="{{ url_for('tasks.list_') }}">Cancelar</a>
   </div>
