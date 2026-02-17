@@ -23,7 +23,14 @@ def get_by_date(date_str: str):
             SELECT proy_id, proy_nom, proy_des, proy_fec, proy_est, proy_pri
             FROM PROY
             WHERE proy_fec = ?
-            ORDER BY proy_pri DESC, proy_id DESC
+            ORDER BY
+              CASE proy_pri
+                WHEN 'alta' THEN 3
+                WHEN 'media' THEN 2
+                WHEN 'baja' THEN 1
+                ELSE 0
+              END DESC,
+              proy_id DESC
             """,
             (date_str,),
         ).fetchall()
