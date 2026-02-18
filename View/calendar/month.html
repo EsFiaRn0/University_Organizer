@@ -5,67 +5,81 @@
 {% endblock %}
 {% block content %}
 
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 calendar-head">
-  <div>
-    <div class="tag mb-1">Vista mensual</div>
-    <h3 class="m-0 page-title">{{ view.month_name }} {{ view.year }}</h3>
-  </div>
-  <div class="d-flex gap-2 flex-wrap calendar-nav-actions">
-    <a class="btn btn-outline-secondary"
-       href="{{ url_for('calendar.month_current', y=view.prev_year, m=view.prev_month) }}">&larr; Mes anterior</a>
-    <a class="btn btn-outline-secondary"
-       href="{{ url_for('calendar.month_current', y=view.next_year, m=view.next_month) }}">Mes siguiente &rarr;</a>
-  </div>
-</div>
-
-<div class="card-shell p-3 p-md-4">
-  <div class="calendar-scroll">
-  <div class="calendar-grid">
-  <div class="row g-2 calendar-weekday text-center mb-2">
-    <div class="col">Lun</div>
-    <div class="col">Mar</div>
-    <div class="col">Mié</div>
-    <div class="col">Jue</div>
-    <div class="col">Vie</div>
-    <div class="col">Sáb</div>
-    <div class="col">Dom</div>
+<section class="calendar-page">
+  <div class="calendar-meta calendar-meta-spacing">
+    <div class="calendar-left">
+      <div class="tag">Vista mensual</div>
+      <h3 class="m-0 page-title calendar-title">{{ view.month_name }} {{ view.year }}</h3>
+      <div class="calendar-legend">
+        <span class="legend-chip legend-alta">Alta</span>
+        <span class="legend-chip legend-media">Media</span>
+        <span class="legend-chip legend-baja">Baja</span>
+      </div>
+    </div>
+    <div class="calendar-controls">
+      <div class="calendar-hint">Maximo 2 tareas visibles por dia</div>
+      <div class="d-flex gap-2 flex-wrap calendar-nav-actions">
+        <a class="btn btn-outline-secondary calendar-nav-btn"
+           href="{{ url_for('calendar.month_current', y=view.prev_year, m=view.prev_month) }}">&larr; Mes anterior</a>
+        <a class="btn btn-outline-secondary calendar-nav-btn"
+           href="{{ url_for('calendar.month_current') }}">Hoy</a>
+        <a class="btn btn-outline-secondary calendar-nav-btn"
+           href="{{ url_for('calendar.month_current', y=view.next_year, m=view.next_month) }}">Mes siguiente &rarr;</a>
+      </div>
+    </div>
   </div>
 
-  {% for week in view.weeks %}
-  <div class="row g-2 mb-2 calendar-week">
-    {% for day in week %}
-      {% if day == 0 %}
-        <div class="col">
-          <div class="calendar-blank"></div>
+  <div class="card-shell p-3 p-md-4">
+    <div class="calendar-scroll">
+      <div class="calendar-grid">
+        <div class="row g-2 calendar-weekday text-center mb-2">
+          <div class="col">Lun</div>
+          <div class="col">Mar</div>
+          <div class="col">Mie</div>
+          <div class="col">Jue</div>
+          <div class="col">Vie</div>
+          <div class="col">Sab</div>
+          <div class="col">Dom</div>
         </div>
-      {% else %}
-        {% set is_today = (view.today_day == day) %}
-        <div class="col">
-          <div class="calendar-day {% if is_today %}is-today{% endif %}">
-            <div class="day-number">{{ day }}</div>
-            {% set day_tasks = tasks_by_day.get(day, []) %}
-            {% if day_tasks %}
-              <div class="calendar-tasks">
-                {% for t in day_tasks[:2] %}
-                  <div class="calendar-task priority-{{ t['proy_pri'] }}">
-                    <div class="calendar-task-title">{{ t["proy_nom"] }}</div>
-                  </div>
-                {% endfor %}
-                {% if day_tasks|length > 2 %}
-                  <div class="calendar-more">+{{ day_tasks|length - 2 }} más</div>
-                {% endif %}
+
+        {% for week in view.weeks %}
+        <div class="row g-2 mb-2 calendar-week">
+          {% for day in week %}
+            {% if day == 0 %}
+              <div class="col">
+                <div class="calendar-blank"></div>
               </div>
             {% else %}
-              <div class="day-slot">Sin tareas</div>
+              {% set is_today = (view.today_day == day) %}
+              <div class="col">
+                <div class="calendar-day {% if is_today %}is-today{% endif %}">
+                  <div class="day-number">{{ day }}</div>
+                  {% set day_tasks = tasks_by_day.get(day, []) %}
+                  {% if day_tasks %}
+                    <div class="calendar-tasks">
+                      {% for t in day_tasks[:2] %}
+                        <a class="calendar-task priority-{{ t['proy_pri'] }}"
+                           href="{{ url_for('tasks.view_', proy_id=t['proy_id']) }}"
+                           title="{{ t['proy_nom'] }}">
+                          <div class="calendar-task-title">{{ t["proy_nom"] }}</div>
+                        </a>
+                      {% endfor %}
+                      {% if day_tasks|length > 2 %}
+                        <div class="calendar-more">+{{ day_tasks|length - 2 }} mas</div>
+                      {% endif %}
+                    </div>
+                  {% else %}
+                    <div class="day-slot">Sin tareas</div>
+                  {% endif %}
+                </div>
+              </div>
             {% endif %}
-          </div>
+          {% endfor %}
         </div>
-      {% endif %}
-    {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
   </div>
-  {% endfor %}
-  </div>
-  </div>
-</div>
+</section>
 
 {% endblock %}
