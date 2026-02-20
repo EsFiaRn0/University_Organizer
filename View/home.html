@@ -74,9 +74,22 @@
             {% set is_today = (view.today_day == day) %}
             <div class="col">
               {% set day_pri = day_priorities.get(day, []) %}
-              {% set has_tasks = day_pri|length > 0 %}
+              {% set day_count = day_task_counts.get(day, 0) %}
+              {% set has_tasks = day_count > 0 %}
               <div class="calendar-day {% if is_today %}is-today{% endif %}{% if has_tasks %} priority-mix{% endif %}{% if 'baja' in day_pri %} has-baja{% endif %}{% if 'media' in day_pri %} has-media{% endif %}{% if 'alta' in day_pri %} has-alta{% endif %}">
                 <div class="day-number">{{ day }}</div>
+                <div class="mini-day-foot">
+                  {% if has_tasks %}
+                    <span class="mini-count">{{ day_count }}</span>
+                    <div class="mini-priority-dots">
+                      {% if 'alta' in day_pri %}<span class="mini-dot alta"></span>{% endif %}
+                      {% if 'media' in day_pri %}<span class="mini-dot media"></span>{% endif %}
+                      {% if 'baja' in day_pri %}<span class="mini-dot baja"></span>{% endif %}
+                    </div>
+                  {% else %}
+                    <span class="mini-empty">sin tareas</span>
+                  {% endif %}
+                </div>
               </div>
             </div>
           {% endif %}

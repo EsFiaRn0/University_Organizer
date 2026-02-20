@@ -7,6 +7,20 @@
   --surface: #ffffff;
   --shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
   --radius: 18px;
+  --card-bg: linear-gradient(145deg, #ffffff, #f1f5f9);
+  --card-border: rgba(148, 163, 184, 0.3);
+  --prio-low: #22c55e;
+  --prio-med: #f59e0b;
+  --prio-high: #ef4444;
+  --prio-low-soft-ink: #14532d;
+  --prio-low-soft-bg: #dcfce7;
+  --prio-low-soft-border: #86efac;
+  --prio-med-soft-ink: #78350f;
+  --prio-med-soft-bg: #fef3c7;
+  --prio-med-soft-border: #fcd34d;
+  --prio-high-soft-ink: #7f1d1d;
+  --prio-high-soft-bg: #fee2e2;
+  --prio-high-soft-border: #fca5a5;
 }
 
 [data-bs-theme="dark"] {
@@ -17,6 +31,17 @@
   --accent-strong: #0ea5e9;
   --surface: #0f172a;
   --shadow: 0 14px 32px rgba(2, 6, 23, 0.55);
+  --card-bg: linear-gradient(160deg, #0f1c34, #0c162a);
+  --card-border: rgba(148, 163, 184, 0.34);
+  --prio-low-soft-ink: #bbf7d0;
+  --prio-low-soft-bg: rgba(34, 197, 94, 0.2);
+  --prio-low-soft-border: rgba(74, 222, 128, 0.45);
+  --prio-med-soft-ink: #fde68a;
+  --prio-med-soft-bg: rgba(245, 158, 11, 0.2);
+  --prio-med-soft-border: rgba(251, 191, 36, 0.5);
+  --prio-high-soft-ink: #fecaca;
+  --prio-high-soft-bg: rgba(239, 68, 68, 0.2);
+  --prio-high-soft-border: rgba(248, 113, 113, 0.5);
 }
 
 body {

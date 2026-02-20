@@ -51,12 +51,14 @@ def create_app():
 
         month_tasks = TaskRepo.get_by_month(view.year, view.month)
         day_priorities = {}
+        day_task_counts = {}
         for t in month_tasks:
             try:
                 day = int(str(t["proy_fec"]).split("-")[2])
             except (IndexError, ValueError):
                 continue
             day_priorities.setdefault(day, set()).add(t["proy_pri"])
+            day_task_counts[day] = day_task_counts.get(day, 0) + 1
 
         return render_template(
             "home.html",
@@ -65,6 +67,7 @@ def create_app():
             tareas_hoy=tareas_hoy,
             tareas_rango=tareas_rango,
             day_priorities=day_priorities,
+            day_task_counts=day_task_counts,
             today_str=today_str,
             total_asignaturas=total_asignaturas,
             total_tareas_rango=total_tareas_rango,

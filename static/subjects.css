@@ -7,8 +7,8 @@
 .subject-card {
   padding: 18px;
   border-radius: 16px;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -18,8 +18,8 @@
 }
 
 [data-bs-theme="dark"] .subject-card {
-  border-color: rgba(148, 163, 184, 0.28);
-  background: linear-gradient(145deg, #111827, #0f172a);
+  border-color: var(--card-border);
+  background: var(--card-bg);
 }
 
 [data-bs-theme="dark"] .subject-card:hover {
@@ -48,15 +48,15 @@
 }
 
 .badge-active {
-  color: #14532d;
-  background: #dcfce7;
-  border: 1px solid #86efac;
+  color: var(--prio-low-soft-ink);
+  background: var(--prio-low-soft-bg);
+  border: 1px solid var(--prio-low-soft-border);
 }
 
 [data-bs-theme="dark"] .badge-active {
-  color: #bbf7d0;
-  background: rgba(34, 197, 94, 0.2);
-  border-color: rgba(74, 222, 128, 0.45);
+  color: var(--prio-low-soft-ink);
+  background: var(--prio-low-soft-bg);
+  border-color: var(--prio-low-soft-border);
 }
 
 @media (max-width: 767.98px) {

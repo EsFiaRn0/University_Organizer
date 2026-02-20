@@ -29,29 +29,29 @@
     </div>
   </div>
 
-  <div class="card-shell p-3 p-md-4">
+  <div class="card-shell p-3 p-md-4 calendar-shell">
     <div class="calendar-scroll">
       <div class="calendar-grid">
-        <div class="row g-2 calendar-weekday text-center mb-2">
-          <div class="col">Lun</div>
-          <div class="col">Mar</div>
-          <div class="col">Mie</div>
-          <div class="col">Jue</div>
-          <div class="col">Vie</div>
-          <div class="col">Sab</div>
-          <div class="col">Dom</div>
+        <div class="calendar-weekday">
+          <div class="calendar-weekday-item">Lun</div>
+          <div class="calendar-weekday-item">Mar</div>
+          <div class="calendar-weekday-item">Mie</div>
+          <div class="calendar-weekday-item">Jue</div>
+          <div class="calendar-weekday-item">Vie</div>
+          <div class="calendar-weekday-item">Sab</div>
+          <div class="calendar-weekday-item">Dom</div>
         </div>
 
         {% for week in view.weeks %}
-        <div class="row g-2 mb-2 calendar-week">
+        <div class="calendar-week">
           {% for day in week %}
             {% if day == 0 %}
-              <div class="col">
+              <div class="calendar-cell">
                 <div class="calendar-blank"></div>
               </div>
             {% else %}
               {% set is_today = (view.today_day == day) %}
-              <div class="col">
+              <div class="calendar-cell">
                 <div class="calendar-day {% if is_today %}is-today{% endif %}">
                   <div class="day-number">{{ day }}</div>
                   {% set day_tasks = tasks_by_day.get(day, []) %}

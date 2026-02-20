@@ -61,9 +61,9 @@
   border-radius: 999px;
 }
 
-.legend-alta::before { background: #ef4444; }
-.legend-media::before { background: #f59e0b; }
-.legend-baja::before { background: #22c55e; }
+.legend-alta::before { background: var(--prio-high); }
+.legend-media::before { background: var(--prio-med); }
+.legend-baja::before { background: var(--prio-low); }
 
 [data-bs-theme="dark"] .legend-chip {
   background: rgba(15, 23, 42, 0.65);
@@ -143,8 +143,8 @@
 }
 
 .calendar-day {
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  background: #ffffff;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -153,8 +153,8 @@
 }
 
 [data-bs-theme="dark"] .calendar-day {
-  background: #0c1830;
-  border-color: rgba(148, 163, 184, 0.28);
+  background: var(--card-bg);
+  border-color: var(--card-border);
 }
 
 .calendar-day.is-today {
@@ -185,31 +185,31 @@
 }
 
 .calendar-day.priority-mix.has-baja:not(.has-media):not(.has-alta)::before {
-  background: #22c55e;
+  background: var(--prio-low);
 }
 
 .calendar-day.priority-mix.has-media:not(.has-baja):not(.has-alta)::before {
-  background: #f59e0b;
+  background: var(--prio-med);
 }
 
 .calendar-day.priority-mix.has-alta:not(.has-baja):not(.has-media)::before {
-  background: #ef4444;
+  background: var(--prio-high);
 }
 
 .calendar-day.priority-mix.has-baja.has-media:not(.has-alta)::before {
-  background: conic-gradient(#22c55e 0 180deg, #f59e0b 180deg 360deg);
+  background: conic-gradient(var(--prio-low) 0 180deg, var(--prio-med) 180deg 360deg);
 }
 
 .calendar-day.priority-mix.has-baja.has-alta:not(.has-media)::before {
-  background: conic-gradient(#22c55e 0 180deg, #ef4444 180deg 360deg);
+  background: conic-gradient(var(--prio-low) 0 180deg, var(--prio-high) 180deg 360deg);
 }
 
 .calendar-day.priority-mix.has-media.has-alta:not(.has-baja)::before {
-  background: conic-gradient(#f59e0b 0 180deg, #ef4444 180deg 360deg);
+  background: conic-gradient(var(--prio-med) 0 180deg, var(--prio-high) 180deg 360deg);
 }
 
 .calendar-day.priority-mix.has-baja.has-media.has-alta::before {
-  background: conic-gradient(#22c55e 0 120deg, #f59e0b 120deg 240deg, #ef4444 240deg 360deg);
+  background: conic-gradient(var(--prio-low) 0 120deg, var(--prio-med) 120deg 240deg, var(--prio-high) 240deg 360deg);
 }
 
 .calendar-day .day-number {
@@ -271,15 +271,15 @@
 }
 
 .calendar-task.priority-baja {
-  border-left: 3px solid #22c55e;
+  border-left: 3px solid var(--prio-low);
 }
 
 .calendar-task.priority-media {
-  border-left: 3px solid #f59e0b;
+  border-left: 3px solid var(--prio-med);
 }
 
 .calendar-task.priority-alta {
-  border-left: 3px solid #ef4444;
+  border-left: 3px solid var(--prio-high);
 }
 
 .calendar-more {
