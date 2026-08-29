@@ -25,7 +25,7 @@
 ---
 
 <p align="center">
-  <img src="docs/demo.gif" alt="University Organizer Demo" width="100%">
+  <img width="1152" height="648" alt="Image" src="https://github.com/user-attachments/assets/6faf5714-5ffa-469a-bfb0-b8ae3077a00e" />
 </p>
 
 ---
